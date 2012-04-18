@@ -1,0 +1,99 @@
+BOARD_USES_QCOM_HARDWARE := true
+BOARD_USES_QCOM_LIBS := true
+BOARD_USES_QCOM_LIBRPC := true
+# BOARD_USES_QCOM_LEGACY := true
+
+
+TARGET_GLOBAL_CFLAGS += -mfpu=vfp -mfloat-abi=softfp -Os
+TARGET_GLOBAL_CPPFLAGS += -mfpu=vfp -mfloat-abi=softfp -Os
+
+
+#Device Information
+TARGET_BOARD_PLATFORM := msm7x27
+TARGET_ARCH := arm
+TARGET_ARCH_VARIANT := armv6-vfp
+TARGET_CPU_ABI := armeabi-v6l
+TARGET_CPU_ABI2 := armeabi
+TARGET_BOARD_PLATFORM_GPU := qcom-adreno200
+TARGET_BOOTLOADER_BOARD_NAME := thunderc
+TARGET_PROVIDES_INIT_TARGET_RC := true
+
+#BOOT AND BOOTLOADER
+TARGET_NO_BOOTLOADER := true
+TARGET_NO_RADIOIMAGE := true
+
+TARGET_PROVIDES_LIBAUDIO := true
+TARGET_PROVIDES_LIBRIL := true
+
+BOARD_HAVE_BLUETOOTH := true
+BOARD_HAVE_BLUETOOTH_BCM := true
+BOARD_CUSTOM_BRCM_PATCHRAM_PLUS := ../../../device/lge/thunderc/prebuilt/brcm_patchram_plus.c
+
+BOARD_FLASH_BLOCK_SIZE := 131072
+
+# to enable the GPS HAL
+BOARD_USES_QCOM_GPS := true
+BOARD_VENDOR_QCOM_GPS_LOC_API_HARDWARE := thunderc
+# AMSS version to use for GPS
+BOARD_VENDOR_QCOM_GPS_LOC_API_AMSS_VERSION := 50000
+
+
+#Enable OpenGL Hardware Acceleration
+BOARD_EGL_CFG := device/lge/thunderc-common/prebuilt/etc/egl.cfg
+USE_OPENGL_RENDERER := true
+TARGET_USES_GENLOCK := true
+BOARD_NO_ALLOW_DEQUEUE_CURRENT_BUFFER := true
+
+#Enable jit
+JS_ENGINE := v8
+WITH_JIT := true
+ARCH_ARM_HAVE_VFP := true
+
+# Mass Storage for ICS
+BOARD_USE_USB_MASS_STORAGE_SWITCH := true
+BOARD_CUSTOM_USB_CONTROLLER := ../../device/lge/thunderc/prebuilt/UsbController.cpp
+BOARD_UMS_LUNFILE := /sys/devices/platform/msm_hsusb/gadget/lun0/file
+TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/devices/platform/usb_mass_storage/lun0/file
+
+#TouchScreen Compatibility for ICS
+BOARD_USE_LEGACY_TOUCHSCREEN := true
+
+TARGET_SPECIFIC_HEADER_PATH := device/lge/thunderc-common/include
+TARGET_LIBAGL_USE_GRALLOC_COPYBITS := true
+BOARD_CAMERA_USE_GETBUFFERINFO := true
+BOARD_USE_CAF_LIBCAMERA := true
+
+BOARD_WLAN_DEVICE := bcm4325
+WIFI_DRIVER_FW_STA_PATH         := "/system/etc/wl/rtecdc.bin"
+WIFI_DRIVER_FW_AP_PATH          := "/system/etc/wl/rtecdc_apsta.bin"
+WIFI_DRIVER_MODULE_NAME         := wireless
+BOARD_WIRELESS_CHIP             := bcm4325
+WIFI_DRIVER_MODULE_PATH         := "/system/lib/modules/wireless.ko"
+WIFI_DRIVER_MODULE_ARG          := "firmware_path=/system/etc/wl/rtecdc.bin nvram_path=/system/etc/wl/nvram.txt"
+WPA_SUPPLICANT_VERSION          := VER_0_6_X
+WIFI_DRIVER_HAS_LGE_SOFTAP      := true
+BOARD_WEXT_NO_COMBO_SCAN       := true
+BOARD_WPA_SUPPLICANT_DRIVER := WEXT
+
+BOARD_COMBO_DEVICE_SUPPORTED := true
+BOARD_CDMA_NETWORK := true
+
+BOARD_FM_DEVICE := bcm4325
+BOARD_HAVE_FM_RADIO := true
+BOARD_GLOBAL_CFLAGS += -DHAVE_FM_RADIO
+
+#ICS settings
+DISABLE_DEXPREOPT := true
+COMMON_GLOBAL_CFLAGS += -DREFRESH_RATE=60
+COMMON_GLOBAL_CFLAGS += -DTARGET_MSM7x27
+COMMON_GLOBAL_CFLAGS += -DMISSING_EGL_EXTERNAL_IMAGE -DMISSING_GRALLOC_BUFFERS
+COMMON_GLOBAL_CFLAGS += -DMISSING_EGL_PIXEL_FORMAT_YV12
+COMMON_GLOBAL_CFLAGS += -DUSE_LGE_ALS_DUMMY
+COMMON_GLOBAL_CFLAGS += -DQCOM_HARDWARE
+COMMON_GLOBAL_CFLAGS += -DBINDER_COMPAT
+TARGET_FORCE_CPU_UPLOAD := true
+
+TARGET_OTA_ASSERT_DEVICE := thunderc
+
+# OFFLINE CHARGING
+BOARD_GLOBAL_CFLAGS += -DCHARGERMODE_CMDLINE_NAME='"lge.reboot"' -DCHARGERMODE_CMDLINE_VALUE='"pwroff"'
